@@ -1,0 +1,31 @@
+npm install uglify-js
+npm install express multer uglify-js
+
+
+create structure.json
+
+# command starts here 
+
+
+# Initialize the index
+$script:Index = 0
+
+# Get the list of files, filter them, and create JSON objects
+$files = Get-ChildItem -Recurse -File -Include *.css, *.js, *.html, *.scss |
+    Where-Object { $_.Name -notmatch '\.min\.(css|js)$' } |
+    ForEach-Object {
+        [PSCustomObject]@{
+            Index = $script:Index++
+            FullPath = $_.FullName
+            FileName = $_.Name
+        }
+    }
+
+# Convert to JSON and save it to a file
+$files | ConvertTo-Json -Depth 1 | Set-Content -Path "structure.json"
+
+# Confirmation message
+Write-Host "JSON structure saved to structure.json"
+
+
+# commands ends here

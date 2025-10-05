@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="areaApp">
+<head>
+  <meta charset="utf-8">
+  <title>Area Graph with Gradient Fade</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      text-align: center;
+    }
+    canvas {
+      max-width: 700px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body ng-controller="AreaCtrl">
+  <h2>Area Graph with Faded Gradient</h2>
+  <canvas id="areaChart" width="700" height="400"></canvas>
+
+  <script>
+    angular.module('areaApp', []).controller('AreaCtrl', function($scope, $timeout) {
+      $timeout(function () {
+        const ctx = document.getElementById('areaChart').getContext('2d');
+
+        // Create gradient for each dataset
+        const gradientBlue = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientBlue.addColorStop(0, 'rgba(54, 162, 235, 0.5)'); // solid top
+        gradientBlue.addColorStop(1, 'rgba(54, 162, 235, 0)');   // transparent bottom
+
+        const gradientRed = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientRed.addColorStop(0, 'rgba(255, 99, 132, 0.5)');
+        gradientRed.addColorStop(1, 'rgba(255, 99, 132, 0)');
+
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+            datasets: [{
+              label: 'Sales',
+              data: [30, 50, 40, 60, 70, 50, 90],
+              fill: true,
+              borderColor: 'rgba(54, 162, 235, 1)',
+              backgroundColor: gradientBlue,
+              tension: 0.4
+            }, {
+              label: 'Expenses',
+              data: [20, 40, 35, 50, 55, 45, 65],
+              fill: true,
+              borderColor: 'rgba(255, 99, 132, 1)',
+              backgroundColor: gradientRed,
+              tension: 0.4
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                display: true,
+                position: 'top'
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

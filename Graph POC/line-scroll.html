@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="chartApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Horizontal Scroll Chart</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+
+    .chart-scroll-wrapper {
+      overflow-x: auto;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .chart-inner {
+      width: 2000px;
+      height: 500px;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  </style>
+</head>
+<body ng-controller="ChartController">
+
+  <div class="chart-scroll-wrapper">
+    <div class="chart-inner">
+      <canvas id="studentChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    angular.module('chartApp', []).controller('ChartController', function($scope) {
+      const ctx = document.getElementById('studentChart').getContext('2d');
+      let chart;
+
+      const studentCount = 100;
+      const studentData = Array.from({ length: studentCount }, (_, i) => ({
+        name: 'Student ' + (i + 1),
+        weekly: Math.floor(Math.random() * 41 + 10)
+      }));
+
+      const labels = studentData.map(s => s.name);
+      const data = studentData.map(s => s.weekly);
+
+      chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Weekly Scores',
+            data: data,
+            backgroundColor: 'rgba(75, 192, 192, 0.4)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: false,
+          maintainAspectRatio: false,
+          scales: {
+            xAxes: [{
+              ticks: {
+                autoSkip: false,
+                maxRotation: 45,
+                minRotation: 30
+              }
+            }],
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          },
+          tooltips: {
+            mode: 'index',
+            intersect: false
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

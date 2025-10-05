@@ -1,0 +1,54 @@
+[
+  {
+    "id": "1256_26720_1751446732240",
+    "vendorId": 1256,
+    "productId": 26720,
+    "manufacturer": "SAMSUNG Electronics Co., Ltd. ",
+    "deviceName": "SAMSUNG Mobile USB Composite Device ",
+    "serialNumber": "RZ8M90BYXCX",
+    "connectionTime": "2025-07-02T08:58:52.240Z",
+    "disconnectionTime": "2025-07-02T08:58:59.103Z"
+  },
+  {
+    "id": "1256_26720_1751446756579",
+    "vendorId": 1256,
+    "productId": 26720,
+    "manufacturer": "SAMSUNG Electronics Co., Ltd. ",
+    "deviceName": "SAMSUNG Mobile USB Composite Device ",
+    "serialNumber": "RZ8M90BYXCX",
+    "connectionTime": "2025-07-02T08:59:16.579Z",
+    "disconnectionTime": "2025-07-02T08:59:22.134Z"
+  },
+  {
+    "id": "drive_PhysicalDrive0_1751447043618",
+    "type": "Drive",
+    "device": "\\\\.\\PhysicalDrive0",
+    "description": "SK hynix SC311 SATA 256GB",
+    "mountpoints": [
+      "C:\\"
+    ],
+    "connectionTime": "2025-07-02T09:04:03.618Z",
+    "disconnectionTime": null
+  },
+  {
+    "id": "usb_1256_26720_1751447061412",
+    "type": "USB",
+    "vendorId": 1256,
+    "productId": 26720,
+    "manufacturer": "SAMSUNG Electronics Co., Ltd. ",
+    "deviceName": "SAMSUNG Mobile USB Composite Device ",
+    "serialNumber": "RZ8M90BYXCX",
+    "connectionTime": "2025-07-02T09:04:21.412Z",
+    "disconnectionTime": "2025-07-02T09:04:45.123Z"
+  },
+  {
+    "id": "1256_26720_1751519395238",
+    "vendorId": 1256,
+    "productId": 26720,
+    "manufacturer": "SAMSUNG Electronics Co., Ltd. ",
+    "deviceName": "SAMSUNG Mobile USB Composite Device ",
+    "serialNumber": "RZ8M90BYXCX",
+    "connectionTime": "2025-07-03T05:09:55.238Z",
+    "disconnectionTime": "2025-07-03T05:10:11.388Z"
+  }
+]

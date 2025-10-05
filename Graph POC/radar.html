@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="radarApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Radar Chart with AngularJS</title>
+    <!-- AngularJS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        canvas {
+            max-width: 600px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body ng-controller="RadarChartController">
+
+    <h2>Radar Chart Example</h2>
+    <canvas id="radarChart" width="400" height="400"></canvas>
+
+    <script>
+        angular.module('radarApp', [])
+        .controller('RadarChartController', function($scope, $timeout) {
+            // Use $timeout to ensure DOM is ready
+            $timeout(function() {
+                var ctx = document.getElementById('radarChart').getContext('2d');
+                var radarChart = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Communication', 'Teamwork', 'Problem Solving', 'Creativity', 'Leadership', 'Time Management'],
+                        datasets: [{
+                            label: 'Student A',
+                            data: [80, 70, 90, 60, 85, 75],
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(54, 162, 235, 1)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Skill Assessment Radar'
+                            }
+                        },
+                        scales: {
+                            r: {
+                                suggestedMin: 0,
+                                suggestedMax: 100
+                            }
+                        }
+                    }
+                });
+            }, 0);
+        });
+    </script>
+
+</body>
+</html>

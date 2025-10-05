@@ -1,0 +1,50 @@
+{
+  "name": "CodePexel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "Learn To Build",
+  "author": "Shubham",
+  "license": "ISC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^33.0.2",
+    "electron-builder": "^25.1.8",
+    "electron-packager": "^17.1.2"
+  },
+  "build": {
+    "appId": "https://myenovation.com/",
+    "productName": "CodePexel",
+    "copyright": "Copyright © 2024 CodePexel",
+    "icon": "assets/img/favicon2.png",
+    "directories": {
+      "buildResources": "build"
+    },
+    "files": [
+      "index.js",
+      "index.html",
+      "assets/**/*"  ,
+    "node_modules/**/*",
+    "dist/**/*"
+   ],
+  "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ]
+    }
+  }
+}

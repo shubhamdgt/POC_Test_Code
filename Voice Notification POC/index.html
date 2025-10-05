@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>EOEL Voice Notification System </title>
+</head>
+<body>
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="col-md-6">
+            <h3 class="text-center">EOEL Voice Notification System</h3>
+            <form id="notificationForm">
+                <div class="form-group">
+                    <label for="language">Select Language:</label>
+                    <select class="form-control" id="language" required>
+                        <option value="">Choose Language</option>
+                        <option value="hindi">Hindi</option>
+                        <!-- <option value="english">English</option> -->
+                        <option value="marathi">Marathi</option>
+                        <!-- <option value="kannada">Kannada</option> -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="destination">Select Destination Type:</label>
+                    <select class="form-control" id="destination" required>
+                        <option value="">Choose Destination Type</option>
+                        <option value="station">Station</option>
+                        <option value="landmark">Landmark</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="destinationName">Select Destination Name:</label>
+                    <select class="form-control" id="destinationName" required>
+                        <option value="">Choose Destination</option>
+                        <option value="pandharpur">Pandharpur</option>
+                        <option value="pune">Pune</option>
+                        <option value="delhi">Delhi</option>
+                        <option value="mumbai">Mumbai</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="distance">Select Distance:</label>
+                    <select class="form-control" id="distance" required>
+                        <option value="">Choose Distance</option>
+                        <option value="1000">1000 m</option>
+                        <option value="500">500 m</option>
+                        <option value="300">300 m</option>
+                        <option value="200">200 m</option>
+                        <option value="100">100 m</option>
+                       
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="playbackSpeed">Select Playback Speed:</label>
+                    <select class="form-control" id="playbackSpeed">
+                        <option value="1">Normal (1x)</option>
+                        <option value="1.25">Fast (1.25x)</option>
+                        <option value="1.35">Fast (1.35x)</option>
+                        <option value="1.45">Fast (1.45x)</option>
+                        <option value="1.5">Fast (1.5x)</option>
+                        <option value="2">Faster (2x)</option>
+                        <option value="0.75">Slow (0.75x)</option>
+                        <option value="0.5">Slower (0.5x)</option>
+                    </select>
+                </div>
+                
+                <button type="button" class="btn btn-success btn-block" id="announceButton">Announce</button>
+            </form>
+            <audio id="notificationSound" src="" preload="auto"></audio>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

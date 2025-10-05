@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPS Data</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>GPS Data</h1>
+        <button id="connect-button">Connect to Serial Port</button>
+        <div id="data">
+            <h2>Parsed Data:</h2>
+            <p>Latitude: <span id="latitude">N/A</span></p>
+            <p>Longitude: <span id="longitude">N/A</span></p>
+            <p>Altitude: <span id="altitude">N/A</span></p>
+            <p>Speed: <span id="speed">N/A</span></p>
+            <p>Date: <span id="date">N/A</span></p>
+            <p>Time (IST): <span id="time">N/A</span></p>
+            <p>Satellites: <span id="satellites">N/A</span></p>
+            <h2>Raw NMEA Data:</h2>
+            <pre id="raw-data">Waiting for data...</pre>
+          </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

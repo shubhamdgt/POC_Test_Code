@@ -1,0 +1,62 @@
+{
+  "fileName": "Internal_Audit_FY26.pptx",
+  "logo1": "logo1.png",
+  "logo2": "logo2.png",
+  "thankImage": "thanks.png",
+  "info": {
+    "title1": "IMS {G1} Internal Audit (FY26)",
+    "mainTitle": "Opening Meeting"
+  },
+  "introduction": [
+    { "label": "Site to be audited", "value": "SiteName" },
+    { "label": "Audit Dates", "value": "22nd and 23rd May 2025" },
+    { "label": "Audit Timings", "value": "10:30 AM to 6:00 PM, Lunch Break at 1:00 PM" },
+    { "label": "Audit Mode", "value": "Virtual" },
+    { "label": "Auditor Details", "value": "1. Sampat Thombare, Business Excellence\n2. Durga Prajapat, O&M (Wind)" }
+  ],
+  "criteria": {
+    "objective": "To check the conformance of requirements of following standards & legal requirements",
+    "table": [
+      ["Group", "ISO Standards"],
+      ["01", "1. ISO 9001:2015\n2. ISO 14001:2015\n3. ISO 45001:2018\n4. ISO 50001:2018\n5. ISO 55001:2014"]
+    ],
+    "approach": [
+      "A – Availability of systems",
+      "A – Adequacy of systems",
+      "A – Adherence of systems"
+    ]
+  },
+  "methodology": [
+    "Fact finding exercise, not a fault-finding activity",
+    "Limited sampling-based audit",
+    "Asking questions, sampling work, examining documents",
+    "Safety guidelines & PPEs to be followed (if in-person)",
+    "Audit report will be shared within 5 days",
+    "Findings classification: Conformance, NC, OFI",
+    "Use of checklists for systematic evaluation",
+    "Continuous observation and evidence recording",
+    "Interaction with site teams to clarify processes",
+    "Final discussion before closing meeting with top management"
+  ],
+  "plan": {
+    "day1": [
+      ["Day", "Audit Area/Process", "Time (Min)", "Name of Auditors"],
+      ["Day-1", "Opening Meeting", "30", "Auditor-1 & 2"],
+      ["", "MR and Top Management", "120", "Auditor-1 & 2"],
+      ["", "O&M", "180", "Auditor-1"],
+      ["", "HR & Admin", "60", "Auditor-2"],
+      ["", "Security", "60", "Auditor-2"],
+      ["", "Purchase and Store", "90", "Auditor-2"],
+      ["", "Site Visit & Briefing", "90", "Auditor-1 & 2"]
+    ],
+    "day2": [
+      ["Day", "Audit Area/Process", "Time (Min)", "Name of Auditors"],
+      ["Day-2", "Legal Requirement", "120", "Auditor-1 & 2"],
+      ["", "Asset and Energy", "120", "Auditor-1"],
+      ["", "Safety", "150", "Auditor-2"],
+      ["", "Buffer time", "30", "Auditor-1 & 2"],
+      ["", "Auditor Discussion", "30", "Auditor-1 & 2"],
+      ["", "Closing Meeting", "30", "Auditor-1 & 2"]
+    ]
+  }
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Minification</title>
+  <style>
+    /* Style for the progress bar */
+    #progress-container {
+      width: 100%;
+      background-color: #f3f3f3;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    #progress-bar {
+      width: 0;
+      height: 30px;
+      background-color: #4caf50;
+      text-align: center;
+      line-height: 30px;
+      color: white;
+      border-radius: 5px;
+    }
+
+    #status-message {
+      margin-top: 20px;
+    }
+
+    #index-info {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Start Minification Process</h2>
+
+  <button id="start-minification">Start Minification</button>
+
+  <!-- Index and progress info -->
+  <div id="index-info">
+    <p id="current-index">Current Index: 0</p>
+    <p id="total-files">Total Files: 0</p>
+  </div>
+
+  <!-- Progress Bar -->
+  <div id="progress-container">
+    <div id="progress-bar">0%</div>
+  </div>
+
+  <p id="status-message"></p>
+
+  <script>
+   document.getElementById('start-minification').addEventListener('click', async function() {
+  const statusMessage = document.getElementById('status-message');
+  const currentIndexElem = document.getElementById('current-index');
+  const totalFilesElem = document.getElementById('total-files');
+  const progressBar = document.getElementById('progress-bar');
+  statusMessage.textContent = 'Starting minification process...';
+
+  // Get index from localStorage or initialize it to 0
+  let index = localStorage.getItem('index');
+  if (!index) {
+    localStorage.setItem('index', 0);
+    index = 0;
+  }
+
+  // Log the index value to debug
+  console.log('Using index from localStorage:', index);
+
+  try {
+    // Fetch file details
+    const response = await fetch('/getFileDetails');
+    const files = await response.json();
+
+    // Set the total number of files
+    totalFilesElem.textContent = `Total Files: ${files.length}`;
+
+    // Start minification from the saved index
+    await minifyFile(index, files);
+  } catch (error) {
+    statusMessage.textContent = `Error: ${error.message}`;
+  }
+});
+
+  </script>
+</body>
+</html>

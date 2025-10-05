@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload and Download Minified File</title>
+</head>
+<body>
+  <h2>Upload and Automatically Download Minified File</h2>
+
+  <!-- Form to upload a file -->
+  <form id="file-upload-form" enctype="multipart/form-data">
+    <label for="file-upload">Choose a file:</label>
+    <input type="file" id="file-upload" name="file" accept=".js,.txt,.html,.css" required>
+    <button type="submit">Upload File</button>
+  </form>
+
+  <!-- Status message -->
+  <p id="status-message"></p>
+
+  <!-- Download link (hidden by default) -->
+  <div id="download-link" style="display:none;">
+    <p>
+      File has been minified. <a id="minified-file-link" href="" download>Click here to download the file.</a>
+    </p>
+  </div>
+
+  <script>
+    document.getElementById('file-upload-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const statusMessage = document.getElementById('status-message');
+      const downloadLink = document.getElementById('download-link');
+      const fileLink = document.getElementById('minified-file-link');
+
+      // Reset status and download link
+      statusMessage.textContent = '';
+      downloadLink.style.display = 'none';
+
+      const formData = new FormData();
+      const fileInput = document.getElementById('file-upload');
+      formData.append('file', fileInput.files[0]);
+
+      statusMessage.textContent = 'Uploading and processing file...';
+
+      try {
+        const response = await fetch('/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) {
+          throw new Error(await response.text());
+        }
+
+        const data = await response.json();
+
+        // Set the href to the minified file path
+        fileLink.href = `/uploads/${data.filename}`;
+        fileLink.download = data.filename;
+
+        // Display the download link
+        downloadLink.style.display = 'block';
+        statusMessage.textContent = 'File processed successfully!';
+      } catch (error) {
+        statusMessage.textContent = `Error: ${error.message}`;
+      }
+    });
+  </script>
+</body>
+</html>

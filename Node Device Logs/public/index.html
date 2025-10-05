@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>USB Device Monitor</title>
+  <style>
+    body { font-family: sans-serif; background: #f9f9f9; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #333; color: white; }
+  </style>
+</head>
+<body>
+  <h1>🔌 Connected USB Devices</h1>
+  <table id="deviceTable">
+    <thead>
+      <tr>
+        <th>Device Name</th>
+        <th>Vendor ID</th>
+        <th>Product ID</th>
+        <th>Manufacturer</th>
+        <th>Serial</th>
+        <th>Connected At</th>
+        <th>Disconnected At</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    async function loadDevices() {
+      const res = await fetch('/api/devices');
+      const data = await res.json();
+      const tbody = document.querySelector('tbody');
+      tbody.innerHTML = '';
+      data.reverse().forEach(device => {
+        const row = `<tr>
+          <td>${device.deviceName}</td>
+          <td>${device.vendorId}</td>
+          <td>${device.productId}</td>
+          <td>${device.manufacturer}</td>
+          <td>${device.serialNumber}</td>
+          <td>${new Date(device.connectionTime).toLocaleString()}</td>
+          <td>${device.disconnectionTime ? new Date(device.disconnectionTime).toLocaleString() : '🟢 Active'}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+
+    setInterval(loadDevices, 3000); // refresh every 3s
+    loadDevices();
+  </script>
+</body>
+</html>

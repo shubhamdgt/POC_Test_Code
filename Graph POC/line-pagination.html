@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="chartApp">
+<head>
+  <meta charset="UTF-8">
+  <title>AngularJS Chart with Pagination</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+
+    .controls {
+      margin-bottom: 20px;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 500px;
+      width: 100%;
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow-x: auto;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .pagination {
+      margin-top: 10px;
+    }
+
+    .pagination button {
+      margin-right: 10px;
+      padding: 5px 15px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body ng-controller="ChartController">
+
+  <div class="controls">
+    <label>View:
+      <select ng-model="selectedRange" ng-change="updateChart()">
+        <option value="week">Week</option>
+        <option value="month">Month</option>
+        <option value="year">Year</option>
+      </select>
+    </label>
+
+    <label>Chart Type:
+      <select ng-model="chartType" ng-change="updateChart()">
+        <option value="bar">Bar</option>
+        <option value="line">Line</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="chart-container">
+    <canvas id="studentChart"></canvas>
+  </div>
+
+  <div class="pagination">
+    <button ng-click="prevPage()" ng-disabled="currentPage === 0">Prev</button>
+    <button ng-click="nextPage()" ng-disabled="(currentPage + 1) * pageSize >= allStudentData.length">Next</button>
+    <span>Showing {{currentPage * pageSize + 1}} - {{Math.min((currentPage + 1) * pageSize, allStudentData.length)}} of {{allStudentData.length}}</span>
+  </div>
+
+  <script>
+    angular.module('chartApp', []).controller('ChartController', function($scope) {
+      $scope.selectedRange = 'week';
+      $scope.chartType = 'bar';
+      $scope.pageSize = 25;
+      $scope.currentPage = 0;
+
+      // Dummy data for 100 students
+      $scope.allStudentData = Array.from({ length: 100 }, (_, i) => ({
+        name: 'Student ' + (i + 1),
+        weekly: Math.floor(Math.random() * 41 + 10),    // 10–50
+        monthly: Math.floor(Math.random() * 101 + 100), // 100–200
+        yearly: Math.floor(Math.random() * 1001 + 500)  // 500–1500
+      }));
+
+      let chart;
+      const ctx = document.getElementById('studentChart').getContext('2d');
+
+      function renderChart() {
+        const start = $scope.currentPage * $scope.pageSize;
+        const end = start + $scope.pageSize;
+        const pagedData = $scope.allStudentData.slice(start, end);
+
+        const labels = pagedData.map(s => s.name);
+        const data = pagedData.map(s => s[$scope.selectedRange + 'ly']);
+
+        if (chart) chart.destroy();
+
+        chart = new Chart(ctx, {
+          type: $scope.chartType,
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Scores by ' + $scope.selectedRange,
+              data: data,
+              backgroundColor: 'rgba(54, 162, 235, 0.5)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1,
+              fill: $scope.chartType === 'line'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+              xAxes: [{
+                ticks: {
+                  autoSkip: false,
+                  maxRotation: 45,
+                  minRotation: 30
+                }
+              }],
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
+      }
+
+      $scope.updateChart = function() {
+        renderChart();
+      };
+
+      $scope.nextPage = function() {
+        $scope.currentPage++;
+        renderChart();
+      };
+
+      $scope.prevPage = function() {
+        if ($scope.currentPage > 0) {
+          $scope.currentPage--;
+          renderChart();
+        }
+      };
+
+      renderChart();
+    });
+  </script>
+</body>
+</html>
